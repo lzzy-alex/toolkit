@@ -3,6 +3,7 @@ package com.ucap.toolkit.file;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -11,18 +12,18 @@ import com.ucap.toolkit.ex.ToolkitException;
 
 public class FileUtil {
 
-    /**
-     * copy [file] to [destDir/fname]
-     * @throws RuntimeException
-     */
-    public static void copy(File file, String destDir, String fname) {
+    public static void copy(File src, File dest) {
+
         FileOutputStream out = null;
         FileInputStream in = null;
         try {
-            in = new FileInputStream( file );
-            File dir = new File( destDir );
-            if ( !dir.exists() ) dir.mkdirs();
-            out = new FileOutputStream( new File( dir, fname ) );
+
+            if ( !dest.exists() ) {
+                dest = touch( dest );
+            }
+
+            in = new FileInputStream( src );
+            out = new FileOutputStream( dest );
 
             byte [] buf = new byte [ 1024 ];
             int len = 0;
@@ -43,7 +44,32 @@ public class FileUtil {
                 e.printStackTrace();
             }
         }
+    }
 
+    private static File touch(File dest) throws IOException {
+        String p = dest.getCanonicalPath();
+        int dx = p.lastIndexOf( File.separator );
+
+        String dir = p.substring( 0, dx );
+        String fname = p.substring( dx + 1 );
+
+        File tmp = new File( dir );
+        if ( !tmp.exists() ) tmp.mkdirs();
+
+        File ret = new File( tmp, fname );
+        return ret;
+    }
+
+    /**
+     * copy [src] to [destDir/fname]
+     * @throws RuntimeException
+     */
+    public static void copy(File src, String destDir, String fname) {
+        File dir = new File( destDir );
+        if ( !dir.exists() ) dir.mkdirs();
+
+        File dest = new File( dir, fname );
+        copy( src, dest );
     }
 
     /**
