@@ -77,7 +77,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.ucap.Main</mainClass>
+							<mainClass>com.ucap.toolkit.deploy.FilePicker</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

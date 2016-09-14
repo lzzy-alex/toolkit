@@ -97,4 +97,17 @@ public class FileUtil {
         return null;
     }
 
+    /**
+     * remove file or directory
+     */
+    public static void remove(File file) {
+        if ( !file.exists() ) return;
+        if ( file.isDirectory() ) {
+            for ( File f : file.listFiles() ) {
+                remove( f );
+            }
+        }
+        file.delete();
+    }
+
 }

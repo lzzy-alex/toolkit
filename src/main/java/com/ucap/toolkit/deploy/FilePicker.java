@@ -17,6 +17,8 @@ public class FilePicker {
     private static String chgDir = pu.get( "changed_list" );
 
     public static void main(String [] args) throws Exception {
+        FileUtil.remove( new File( destDir ) );
+
         BufferedReader r = new BufferedReader( new InputStreamReader( new FileInputStream( chgDir ), "UTF-8" ) );
 
         String line = null;
