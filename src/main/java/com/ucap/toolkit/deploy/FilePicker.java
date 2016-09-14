@@ -9,6 +9,7 @@ import com.ucap.toolkit.file.FileUtil;
 import com.ucap.toolkit.file.PropertyUtil;
 import com.ucap.toolkit.type.StringUtil;
 
+/** pick out changed file from web container [tomcat] */
 public class FilePicker {
 
     private static PropertyUtil pu = new PropertyUtil( "/deploy/config.properties" );
