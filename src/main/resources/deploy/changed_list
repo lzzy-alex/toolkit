@@ -1,5 +1,8 @@
 #com/ucap/jet/proceeding/enterprisedatalist/servlet/ProceedingEnterpriseServlet.java
 #/jet/project/technology_invest/edit.jsp
 
-/jet/css/listcss.css
-/jet/formmanage/proceeding/exportdata.jsp
+/jet/jet_index.jsp
+/jet/jet_login.jsp
+/jet/project/procedure/mul_show.jsp
+/jet/project/procedure/show.jsp
+
