@@ -42,6 +42,20 @@ public class StringUtil {
     }
 
     /**
+     * <li> subStr(null, 2) = null
+     * <li> subStr("a", 2) = a
+     * <li> subStr("ab", 2) = ab
+     * <li> subStr("abc", 2) = ab
+     */
+    public static String subStr(Object o, int len) {
+        if ( o == null ) return null;
+
+        String str = toStr( o );
+        if ( len < str.length() ) { return str.substring( 0, len ); }
+        return str;
+    }
+
+    /**
      * <li> split("a_b", "_") = (a, b)
      * <li> split("", "_") = emptyList()
      * <li> split(null, "_") = emptyList()
