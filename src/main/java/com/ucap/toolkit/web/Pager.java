@@ -113,7 +113,7 @@ public class Pager {
         url = base + url + "?pageSize=" + pageSize;
         for ( int i = 0; i < argNames.size(); i++ ) {
             Object v = argValues.get( i );
-            if ( StringUtil.isNotEmpty( v ) ) {
+            if ( !StringUtil.isEmpty( v ) ) {
                 url += "&" + argNames.get( i ) + "=" + v.toString().trim();
             }
         }

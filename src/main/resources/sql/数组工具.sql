@@ -1,9 +1,8 @@
--- SQL Server
-
-
--- 求数组长度
--- select dbo.arr_len('a_b_c', '_')
--- drop function arr_len
+/* 
+	Tested : sql server 2000
+	Usage :   select dbo.arr_len('a_b_c', '_')  = 3
+	drop function arr_len
+*/
 create function arr_len 
 (
 	@str varchar(1024),
@@ -30,9 +29,11 @@ end
 return @length
 end
 
--- 取数组某位置的值
--- select dbo.arr_val('a_b_c','_',2)
--- drop function arr_val
+/* 
+	Tested : sql server 2000
+	Usage :   select dbo.arr_val('a_b_c','_',2)  = b
+	drop function arr_val
+*/
 create function arr_val(
 	@str varchar(1024),
 	@separator varchar(10),

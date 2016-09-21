@@ -1,5 +1,6 @@
 package com.ucap.toolkit.jdbc;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ucap.toolkit.type.StringUtil;
 
 /**
  * usage:
@@ -86,6 +89,46 @@ public class JDBC {
             close( rs, st, conn );
         }
         return ret;
+    }
+
+    /**
+     * usage :
+     * <li> call("sp_name", Arrays.asList("arg1", "arg2"), 2)
+     */
+    @SuppressWarnings("unchecked")
+    public List<Object []> call(String spName, List args, int retCol) {
+        Connection conn = conn();
+        CallableStatement c = null;
+        ResultSet rs = null;
+        List<Object []> ret = new ArrayList<Object []>();
+        try {
+            // { call sp_name ( ?, ?, ?) }
+            String nia = StringUtil.dup( "?", ",", args.size() );
+            c = conn.prepareCall( "{call " + spName + "(" + nia + ")}" );
+
+            // arg
+            int cursor = 1;
+            for ( Object o : args ) {
+                c.setObject( cursor++, o );
+            }
+
+            // query
+            rs = c.executeQuery();
+            while ( rs.next() ) {
+                Object [] row = new Object [ retCol ];
+                for ( int i = 0; i < retCol; i++ ) {
+                    row[i] = rs.getObject( i + 1 );
+                }
+                ret.add( row );
+            }
+
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            close( rs, c, conn );
+        }
+        return ret;
+
     }
 
     /**

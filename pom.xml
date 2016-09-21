@@ -11,6 +11,12 @@
 
 	<url>http://maven.apache.org</url>
 
+	<properties>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>utf-8</maven.compiler.encoding>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -77,7 +83,9 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.ucap.toolkit.deploy.FilePicker</mainClass>
+							<mainClass>
+								com.ucap.toolkit.deploy.FilePicker
+							</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

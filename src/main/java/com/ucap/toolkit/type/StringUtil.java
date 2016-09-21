@@ -7,37 +7,28 @@ import java.util.List;
 public class StringUtil {
 
     /**
-     * <li>isNotEmpty(null) = false
-     * <li> isNotEmpty("") = false
-     * <li> else = true
-     */
-    public static boolean isNotEmpty(Object o) {
-        return !isEmpty( o );
-    }
-
-    /**
      * <li> isEmpty(null) = true
      * <li> isEmpty("") = true
-     * <li>else = false
+     * <li> else = false
      */
     public static boolean isEmpty(Object o) {
         return ( o == null || o.toString().length() <= 0 );
     }
 
     /**
-     * <li>toStr(null) = null
-     * <li> toStr("foo") = foo
+     * <li>str(null) = null
+     * <li> str("foo") = foo
      */
-    public static String toStr(Object o) {
+    public static String str(Object o) {
         return o == null ? null : o.toString();
     }
 
     /**
-     * <li>toStr(null, "foo") = foo
-     * <li> toStr("bar", "foo") = bar
+     * <li>str(null, "foo") = foo
+     * <li> str("bar", "foo") = bar
      */
-    public static String toStr(Object o, String on_failed) {
-        String str = toStr( o );
+    public static String str(Object o, String on_failed) {
+        String str = str( o );
         return str == null ? on_failed : str;
     }
 
@@ -47,26 +38,39 @@ public class StringUtil {
      * <li> subStr("ab", 2) = ab
      * <li> subStr("abc", 2) = ab
      */
-    public static String subStr(Object o, int len) {
+    public static String sub(Object o, int len) {
         if ( o == null ) return null;
 
-        String str = toStr( o );
+        String str = str( o );
         if ( len < str.length() ) { return str.substring( 0, len ); }
         return str;
     }
 
     /**
-     * <li> split("a_b", "_") = (a, b)
-     * <li> split("", "_") = emptyList()
-     * <li> split(null, "_") = emptyList()
+     * <li> cast("a_b", "_") = (a, b)
+     * <li> cast("", "_") = emptyList()
+     * <li> cast(null, "_") = emptyList()
      */
-    public static List<String> split(String str, String splitor) {
+    public static List<String> cast(String str, String splitor) {
         if ( isEmpty( str ) ) { return Collections.emptyList(); }
         List<String> sp = new ArrayList<String>();
         for ( String ax : str.split( splitor ) ) {
-            if ( isNotEmpty( ax ) ) sp.add( ax );
+            if ( !isEmpty( ax ) ) sp.add( ax );
         }
         return sp;
+    }
+
+    /**
+     * <li> cast( null, ",", "'" ) = null
+     * <li> cast( Arrays.asList( "a", "b", "c" ), ",", "'" ) = 'a','b','c'
+     */
+    @SuppressWarnings("unchecked")
+    public static String cast(List list, String splitor, String wrapWith) {
+        if ( CollectionUtil.isEmpty( list ) ) return null;
+        StringBuffer buf = new StringBuffer();
+        for ( Object obj : list )
+            buf.append( wrapWith + obj + wrapWith + splitor );
+        return buf.substring( 0, buf.length() - 1 );
     }
 
     /**
@@ -79,6 +83,20 @@ public class StringUtil {
             ret.append( arr[i] );
         }
         return ret.toString();
+    }
+
+    /**
+     * <li> dup( "?", ",", 0 ) =
+     * <li> dup( "?", ",", 1 ) = ?
+     * <li> dup( "?", ",", 2 ) = ?,?
+     */
+    public static String dup(String dupStr, String splitor, int num) {
+        if ( num <= 0 ) return "";
+        StringBuffer buf = new StringBuffer();
+        for ( int i = 0; i < num; i++ ) {
+            buf.append( dupStr + splitor );
+        }
+        return buf.substring( 0, buf.length() - 1 );
     }
 
 }
