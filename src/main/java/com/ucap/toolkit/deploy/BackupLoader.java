@@ -10,12 +10,13 @@ import com.ucap.toolkit.file.PropertyUtil;
 import com.ucap.toolkit.type.StringUtil;
 
 /** pick out changed file from web container [tomcat] */
-public class FilePicker {
+public class BackupLoader {
 
     private static PropertyUtil pu = new PropertyUtil( "/deploy/config.properties" );
     private static String srcDir = pu.get( "src" );
     private static String destDir = pu.get( "dest" );
     private static String chgDir = pu.get( "changed_list" );
+    private static int success = 0;
 
     public static void main(String [] args) throws Exception {
         FileUtil.remove( new File( destDir ) );
@@ -62,16 +63,19 @@ public class FilePicker {
                     i++;
                 }
 
+            } else {
+                System.out.println( "Warning : failed to copy " + line );
             }
         }
 
         r.close();
+        System.out.println( "Sucesss copy : " + success );
     }
 
     private static void copy(File src, File dest) {
         if ( src.exists() && src.isFile() ) {
             FileUtil.copy( src, dest );
-            System.out.println( "File:" + src.getAbsolutePath() + " -> " + dest.getAbsolutePath() );
+            success++;
         }
     }
 

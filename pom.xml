@@ -84,7 +84,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								com.ucap.toolkit.deploy.FilePicker
+								com.ucap.toolkit.deploy.BackupLoader
 							</mainClass>
 						</manifest>
 					</archive>

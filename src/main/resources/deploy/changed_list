@@ -1,8 +1,17 @@
 #com/ucap/jet/proceeding/enterprisedatalist/servlet/ProceedingEnterpriseServlet.java
 #/jet/project/technology_invest/edit.jsp
+#/WEB-INF/classes/struts-project.xml
 
+com/ucap/jet/project/dao/StepDao.java
+com/ucap/jet/project/util/MsgUtil.java
+/jet/jet_entright.jsp
+com/ucap/jet/project/dao/MemberDao.java
+com/ucap/jet/project/vo/AcceptingBiz.java
+/images/qrcode.jpg
 /jet/jet_index.jsp
-/jet/jet_login.jsp
-/jet/project/procedure/mul_show.jsp
-/jet/project/procedure/show.jsp
+/jet/js/Common_Sort.js
+/jet/proceeding/jet_proceeding_processed_list.jsp
+/jet/proceeding/jet_proceedinglist.jsp
+/jet/project/procedure/js/step_label.js
+com/ucap/jet/project/action/ProcedureAuditAction.java
 
